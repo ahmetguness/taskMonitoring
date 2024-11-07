@@ -9,8 +9,11 @@ import SignUp from "./SiSu/SignUp";
 export default function LoginScreen() {
   const appSlice = useSelector((state) => state.appSlice);
 
-  const LoginScreen =
+  const LoginScreenComponent =
     appSlice.loginScreen === "signIn" ? <SignIn /> : <SignUp />;
+
+  const title =
+    appSlice.loginScreen === "signIn" ? ["Sign in", "as"] : ["Sign Up", "as"];
 
   return (
     <LinearGradient
@@ -20,10 +23,12 @@ export default function LoginScreen() {
       end={{ x: 1, y: 0.5 }}
     >
       <View style={styles.textContainer}>
-        <Text style={styles.text1}>Sign in</Text>
-        <Text style={styles.text2}>as {appSlice.userType.toUpperCase()}</Text>
+        <Text style={styles.text1}>{title[0]}</Text>
+        <Text style={styles.text2}>
+          {title[1]} {appSlice.userType.toUpperCase()}
+        </Text>
       </View>
-      <View style={styles.footer}>{LoginScreen}</View>
+      <View style={styles.footer}>{LoginScreenComponent}</View>
     </LinearGradient>
   );
 }

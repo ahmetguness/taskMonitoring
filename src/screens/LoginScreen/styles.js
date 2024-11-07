@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
     width: "50%",
     marginHorizontal: "25%",
     height: "8%",
+    marginBottom: "5%",
   },
   signUpContainer: {
     position: "absolute",
@@ -45,6 +46,14 @@ export const styles = StyleSheet.create({
   },
   text3: {
     fontSize: 18,
+    color: COLORS.primaryR,
+  },
+  cwli: {
+    width: "100%",
+    alignItems: "center",
+  },
+  cwliText: {
+    fontSize: 16,
     color: COLORS.primaryR,
   },
 });

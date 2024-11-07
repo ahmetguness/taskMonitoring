@@ -1,21 +1,37 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import InputArea from "../../../components/InputComponents/InputArea";
 import LGButton from "../../../components/buttons/LGButton";
 import { styles } from "../styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateLoginScreen } from "../../../redux/Slices/AppSlice";
 import { useNavigation } from "@react-navigation/native";
+import { authenticateUser } from "../../../services/firebaseServices";
 
 export default function SignIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const dispatcher = useDispatch();
   const navigation = useNavigation();
+  const userType = useSelector((state) => state.appSlice.userType);
 
-  const signInHandler = () => {
-    console.log(userName, password);
-    navigation.navigate("HomeScreen");
+  const signInHandler = async () => {
+    try {
+      const userKind = userType;
+      const result = await authenticateUser(userKind, userName, password);
+
+      if (result.isValid) {
+        console.log("Login successful:", result.userInfo);
+        navigation.navigate("HomeScreen");
+      } else {
+        Alert.alert("Login Failed", "Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Authentication error:", error);
+      Alert.alert("Error", "An error occurred during login.");
+    }
+    setUserName("");
+    setPassword("");
   };
 
   return (
@@ -31,11 +47,17 @@ export default function SignIn() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <LGButton
-        title="Sign In"
-        style={styles.lgBtn}
-        onPress={() => signInHandler()}
-      />
+      <TouchableOpacity
+        style={styles.cwli}
+        onPress={() => navigation.navigate("HomeScreen")}
+      >
+        <Text style={styles.cwliText}>Continue as Guest</Text>
+        <Text style={[styles.cwliText, { fontSize: 12 }]}>
+          (Single Device Only)
+        </Text>
+      </TouchableOpacity>
+
+      <LGButton title="Sign In" style={styles.lgBtn} onPress={signInHandler} />
       <TouchableOpacity
         style={styles.signUpContainer}
         activeOpacity={0.6}
