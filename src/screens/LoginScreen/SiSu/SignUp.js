@@ -18,7 +18,7 @@ export default function SignUp() {
   const passwordsMatch = password === confirmPassword;
 
   const signUpHandler = () => {
-    navigation.navigate("HomeScreen");
+    navigation.navigate("InformationScreen");
     dispatcher(updateLoginScreen("signIn"));
   };
 

@@ -4,7 +4,10 @@ import InputArea from "../../../components/InputComponents/InputArea";
 import LGButton from "../../../components/buttons/LGButton";
 import { styles } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
-import { updateLoginScreen } from "../../../redux/Slices/AppSlice";
+import {
+  updateLoginScreen,
+  updateUserType,
+} from "../../../redux/Slices/AppSlice";
 import { useNavigation } from "@react-navigation/native";
 import { authenticateUser } from "../../../services/firebaseServices";
 
@@ -34,6 +37,11 @@ export default function SignIn() {
     setPassword("");
   };
 
+  const guestHandler = () => {
+    navigation.navigate("HomeScreen");
+    dispatcher(updateUserType("guest"));
+  };
+
   return (
     <>
       <InputArea
@@ -47,10 +55,7 @@ export default function SignIn() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity
-        style={styles.cwli}
-        onPress={() => navigation.navigate("HomeScreen")}
-      >
+      <TouchableOpacity style={styles.cwli} onPress={() => guestHandler()}>
         <Text style={styles.cwliText}>Continue as Guest</Text>
         <Text style={[styles.cwliText, { fontSize: 12 }]}>
           (Single Device Only)
