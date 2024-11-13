@@ -6,19 +6,19 @@ import { updateUserType } from "../../redux/Slices/AppSlice";
 import { styles } from "./styles";
 import { COLORS } from "../../theme/colors";
 
-export default function SelectionScreen() {
+const SelectionScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const handlePress = (userType) => {
+  const handleUserTypeSelection = (userType) => {
     dispatch(updateUserType(userType));
     navigation.navigate("LoginScreen");
   };
 
-  const renderButton = (userType, backgroundColor, textColor) => (
+  const renderSelectionButton = (userType, backgroundColor, textColor) => (
     <TouchableOpacity
       style={[styles.innerContainer, { backgroundColor }]}
-      onPress={() => handlePress(userType)}
+      onPress={() => handleUserTypeSelection(userType)}
     >
       <Text style={[styles.text, { color: textColor }]}>
         {userType.toUpperCase()}
@@ -28,8 +28,10 @@ export default function SelectionScreen() {
 
   return (
     <View style={styles.root}>
-      {renderButton("parent", COLORS.primaryL, COLORS.primaryR)}
-      {renderButton("child", COLORS.primaryR, COLORS.primaryL)}
+      {renderSelectionButton("parent", COLORS.primaryL, COLORS.primaryR)}
+      {renderSelectionButton("child", COLORS.primaryR, COLORS.primaryL)}
     </View>
   );
-}
+};
+
+export default SelectionScreen;

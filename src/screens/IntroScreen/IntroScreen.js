@@ -1,8 +1,7 @@
-import { View, Text, Button } from "react-native";
-import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Button, View } from "react-native";
 
-export default function IntroScreen() {
+const IntroScreen = () => {
   const navigation = useNavigation();
 
   return (
@@ -13,4 +12,6 @@ export default function IntroScreen() {
       />
     </View>
   );
-}
+};
+
+export default IntroScreen;

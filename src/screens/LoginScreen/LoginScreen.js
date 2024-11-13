@@ -6,7 +6,7 @@ import { styles } from "./styles";
 import SignIn from "./SiSu/SignIn";
 import SignUp from "./SiSu/SignUp";
 
-export default function LoginScreen() {
+const LoginScreen = () => {
   const appSlice = useSelector((state) => state.appSlice);
 
   const LoginScreenComponent =
@@ -31,4 +31,6 @@ export default function LoginScreen() {
       <View style={styles.footer}>{LoginScreenComponent}</View>
     </LinearGradient>
   );
-}
+};
+
+export default LoginScreen;

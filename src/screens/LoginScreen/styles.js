@@ -56,4 +56,8 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.primaryR,
   },
+  loadingIndicator: {
+    marginVertical: 20,
+    alignSelf: "center",
+  },
 });
